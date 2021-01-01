@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student-Mentor</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="https://raywheeler.files.wordpress.com/2012/05/mentor2.jpg">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+</head>
+<body>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+
+    <h1 class="mt-5">Student-Mentor Assigning Portal</h1>
+    <div class="container mt-5">
+
+        <ul class="nav nav-tabs nav-justified" id="navtabs">
+            <li class="nav-item">
+                <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#mentorDB">Mentor Database</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#studentDB">Student Database</a>
+            </li>
+        </ul>
+
+
+
+        <div class="tab-content mt-4">
+
+            <div id="home" class="container tab-pane active">
+                <div id="homeButtons">
+                    <br><br>
+                    <button class="btn btn-primary w-50 mx-auto" data-toggle="modal" data-target="#mentorModal">Add Mentor</button><br><br><br>
+                    <button class="btn btn-warning w-50 mx-auto" data-toggle="modal" data-target="#studentModal">Add Student</button><br><br><br>
+                    <button class="btn btn-info w-50 mx-auto" data-toggle="modal" data-target="#studentAssigningModal" onclick="optionsEval()">Assign Student(s) to a mentor</button><br><br><br>
+                    <button class="btn btn-dark w-50 mx-auto" data-toggle="modal" data-target="#mentorAssigningModal" onclick="optionsEval()">Assign / Change Mentor</button><br><br><br> 
+                    <button class="btn btn-danger w-50 mx-auto" data-toggle="modal" data-target="#myMentorModal">Get specific Mentor Details</button><br><br><br><br> 
+                </div>
+
+                <div class="modal fade" id="mentorModal" role="dialog">
+                    <div class="modal-dialog">
+                    
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Add new Mentor</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+        
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="mentorName">Enter Mentor Name</label>
+                                    <input type="text" class="form-control" id="mentorName" placeholder="Enter mentor name">
+                                    <br>
+                                    <label for="mentorMobile">Enter Mentor Mobile Number</label>
+                                    <input type="tel" class="form-control" id="mentorMobile" placeholder="Enter mentor mobile">   
+                                    <br><br>
+                                    <button class="btn btn-success" id="addNewMentor" onclick="addMentor(); return false;">Add Mentor</button>
+                                </div>
+                            </form>
+                        </div>
+        
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                        </div>  
+                      </div>
+                      
+                    </div>
+                </div>
+
+
+
+                <div class="modal fade" id="studentModal" role="dialog">
+                    <div class="modal-dialog">
+                    
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Add new Student</h4>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+        
+                        <div class="modal-body">
+                            <form>
+                                <div class="form-group">
+                                    <label for="studentName">Enter Student Name</label>
+                                    <input type="text" class="form-control" id="studentName" placeholder="Enter Student name">
+                                    <br>
+                                    <label for="studentMobile">Enter Mentor Mobile Number</label>
+                                    <input type="tel" class="form-control" id="studentMobile" placeholder="Enter Student mobile">   
+                                    <br><br>
+                                    <button class="btn btn-success" id="addNewStudent" onclick="addStudent(); return false;">Add Student</button>
+                                </div>
+                            </form>
+                        </div>
+        
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                        </div>  
+                      </div>
+                      
+                    </div>
+                </div>  
+                
+                
+
+                <div class="modal fade" id="studentAssigningModal" role="dialog">
+                    <div class="modal-dialog">
+                    
+                      <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Assign Student(s) to a Mentor</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+        
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="selectedMentor">Select Mentor</label>
+                                        <select class="form-control" id="selectedMentor"></select>
+                                        <br>
+                                        <label for="selectedStudents">Un-Assigned Students</label>
+                                        <select multiple class="form-control" id="selectedStudents"></select>
+                                        <br><br>
+                                        <button class="btn btn-success" onclick="assignStudents(); return false;">Assign Students</button>
+                                    </div>
+                                </form>
+                            </div>
+        
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                            </div>  
+                        </div>  
+                    </div>
+                </div>
+
+
+                  <div class="modal fade" id="mentorAssigningModal" role="dialog">
+                    <div class="modal-dialog">
+                    
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Assign / Change Mentor</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+            
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="selectStudent">Select Student</label>
+                                        <select class="form-control" id="selectStudent"></select>
+                                        <br>
+                                        <label for="selectMentor">Select Mentor</label>
+                                        <select class="form-control" id="selectMentor"></select>
+                                        <br><br>
+                                        <button class="btn btn-success" onclick="changeMentor(); return false;">Assign Mentor</button>
+                                    </div>
+                                </form>
+                            </div>
+            
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                            </div>  
+                        </div>  
+                    </div>
+                  </div>
+
+
+                  <div class="modal fade" id="myMentorModal" role="dialog">
+                    <div class="modal-dialog">
+                    
+                      <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title">Select a mentor to view his/her assigned Students</h4>
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            </div>
+        
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="myMentor">Select Mentor</label>
+                                        <select class="form-control" id="myMentor"></select>
+                                        <br>
+                                        <button class="btn btn-success" onclick="getByMentorName(); return false;">Get Assigned Students</button><br><br>
+                                        <label for="myTextArea">Students Assigned</label><br>
+                                        <textarea id="myTextArea" class="form-control" rows="4" cols="50"></textarea>
+                                        <br><br>
+                                    </div>
+                                </form>
+                            </div>
+        
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-dismiss="modal">Close</button>
+                            </div>  
+                        </div>  
+                    </div>
+                </div>
+
+
+        
+            </div>
+
+
+            <div id="mentorDB" class="tab-pane fade">
+                <div class="display1">
+                    <div class="table-responsive">
+                        <table class="table" id="mentorTable">
+                            <thead class="thead-dark">
+                                <tr>
+                                  <th scope="col">Mentor Name</th>
+                                  <th scope="col">Assigned Student</th>
+                                  <th scope="col">Mentor Mobile</th>
+                                </tr>
+                            </thead>
+                            <tbody id="mentorBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <div id="studentDB" class="tab-pane fade">
+                <div class="display2">
+                    <div class="table-responsive">
+                        <table class="table" id="studentTable">
+                            <thead class="thead-dark">
+                                <tr>
+                                  <th scope="col">Student Name</th>
+                                  <th scope="col">Assigned Mentor</th>
+                                  <th scope="col">Student Mobile</th>
+                                </tr>
+                            </thead>
+                            <tbody id="studentBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+          
+    </div>
+
+    <script>
+        var url="https://prashanth-student-mentor-app.herokuapp.com/"
+        
+        function assignStudents(){
+            var mentorName=getMentorOption();
+            var studentsAssigned=optionsEval()
+            fetch(url+"updateDB/"+mentorName,{
+                        method:"PUT",
+                        headers:{
+                            'Content-type':'application/json'
+                        },
+                        body:JSON.stringify({studentsAssigned})
+            })
+            alert("Students Assigned Successfully to the Mentor - "+mentorName);
+            getMentorDetails()
+            getStudentDetails()
+        }
+        displayMentors()    
+        displayStudents()
+
+        function changeMentor(){
+            
+            var sName = getChangableStudentOption()
+            var mentorAssigned = getChangedMentorOption()
+            fetch(url+"changeMentor/"+sName,{
+                        method:"PUT",
+                        headers:{
+                            'Content-type':'application/json'
+                        },
+                        body:JSON.stringify({mentorAssigned})
+            })
+            alert("Student Assigned Successfully to the Mentor - "+mentorAssigned);
+            getMentorDetails()
+            getStudentDetails()
+            displayStudents()
+        }
+
+        function addMentor(){
+
+            var mentorName=document.getElementById('mentorName').value
+            var mentorMobile=document.getElementById('mentorMobile').value
+            var studentsAssigned=[]
+            if(mentorName!=="" && mentorMobile!==""){
+                fetch(url+"createMentor",{
+                        method:"POST",
+                        headers:{
+                            'Content-type':'application/json'
+                        },
+                        body:JSON.stringify({mentorName,studentsAssigned,mentorMobile})
+                })
+
+                alert("Mentor - "+mentorName+" Added Successfully")
+                getMentorDetails()
+                getStudentDetails()
+                displayMentors()
+            }
+            else{
+                alert("Please fill all the details")
+            }
+        }
+
+        function addStudent(){
+            var studentName=document.getElementById('studentName').value
+            var studentMobile=Number(document.getElementById('studentMobile').value)
+            var mentorAssigned="Not Assigned Yet"
+
+            if(studentName!=="" && studentMobile!==""){
+                    fetch(url+"createStudent",{
+                        method:"POST",
+                        headers:{
+                            'Content-type':'application/json'
+                        },
+                        body:JSON.stringify({studentName,mentorAssigned,studentMobile})
+                    })
+                    alert("Student - "+studentName+" Added Successfully")
+                    getStudentDetails()
+                    getMentorDetails()
+                    displayStudents()
+                    displayAllStudentsForChanging();
+            }
+            else
+                alert("Please fill all the fields")
+        }
+
+        function getStudentDetails(){
+                document.getElementById('studentBody').innerHTML=""
+                fetch(url+"getStudents")
+                .then(resp=>{return resp.json()})
+                .then(result=>{
+                    result.data.forEach(element => {
+                        createStudentRow(element.studentName,element.mentorAssigned,element.studentMobile);
+                });
+            })
+        }
+
+        function getMentorDetails(){
+            document.getElementById('mentorBody').innerHTML=""
+            fetch(url+"getMentors")
+                .then(resp=>{return resp.json()})
+                .then(result=>{
+                    result.data.forEach(element => {
+                        createMentorRow(element.mentorName,element.studentsAssigned,element.mentorMobile);
+                });
+            })
+        }
+        
+        function getByMentorName(){
+            var myMentorName=getMyMentorOption();
+            
+            var textAreaContent=document.getElementById('myTextArea')
+
+            fetch(url+"getByMentorName/"+myMentorName)
+                .then(resp=>{return resp.json()})
+                .then(result=>{
+                    result.data.forEach(element => {
+                        textAreaContent.value=element.studentsAssigned;
+                });
+            })
+        }
+
+        function displayAllStudentsForChanging(){
+            document.getElementById("selectStudent").innerHTML=""
+            fetch(url+"getStudents")
+            .then(resp=>{return resp.json()})
+            .then(result=>{
+                result.data.forEach(element => {
+                    createStudentsForChanging(element.studentName);
+                });
+            })    
+        }
+        
+        function displayStudents(){
+            document.getElementById('selectedStudents').innerHTML=""
+            fetch(url+"getNonAssignedStudents")
+            .then(resp=>{return resp.json()})
+            .then(result=>{
+                result.data.forEach(element => {
+                    createStudentOptions(element.studentName);
+                });
+            })
+        }
+        
+        function displayMentors(){
+            document.getElementById('selectedMentor').innerHTML=""
+            document.getElementById("selectMentor").innerHTML=""
+            document.getElementById('myMentor').innerHTML=""
+            fetch(url+"getMentors")
+                .then(resp=>{return resp.json()})
+                .then(result=>{
+                    result.data.forEach(element => {
+                        createMentorOptions(element.mentorName);
+                });
+            })
+        }
+
+        getMentorDetails()
+        getStudentDetails()
+        displayAllStudentsForChanging()
+
+        function createStudentRow(studentName,mentorAssigned,studentMobile){
+            var tr=document.createElement('tr')
+            var td1=document.createElement('td')
+            td1.innerHTML=studentName
+            var td2=document.createElement('td')
+            td2.innerHTML=mentorAssigned
+            var td3=document.createElement('td')
+            td3.innerHTML=studentMobile
+            tr.append(td1,td2,td3)
+            document.getElementById('studentBody').append(tr)
+        }
+
+        function createMentorRow(mentorName,studentsAssigned,mentorMobile){
+            var tr=document.createElement('tr')
+            var td1=document.createElement('td')
+            td1.innerHTML=mentorName
+            var td2=document.createElement('td')
+            td2.innerHTML=studentsAssigned
+            var td3=document.createElement('td')
+            td3.innerHTML=mentorMobile
+            tr.append(td1,td2,td3)
+            document.getElementById('mentorBody').append(tr)
+        }
+
+        function createStudentOptions(optionVal){
+            var opt=document.createElement('option')
+            opt.innerHTML=optionVal
+            document.getElementById('selectedStudents').append(opt)
+        }
+        
+        function createStudentsForChanging(optionVal){
+            var opt=document.createElement('option')
+            opt.innerHTML=optionVal
+            document.getElementById('selectStudent').append(opt)
+        }
+
+        function createMentorOptions(optionVal){
+            var opt=document.createElement('option')
+            opt.innerHTML=optionVal
+            var opt2=document.createElement('option')
+            opt2.innerHTML=optionVal
+            var opt3=document.createElement('option')
+            opt3.innerHTML=optionVal
+            document.getElementById('selectMentor').append(opt)
+            document.getElementById('selectedMentor').append(opt2)
+            document.getElementById('myMentor').append(opt3);
+        }
+
+        function optionsEval(){
+            var studentsAssigned=[]
+            for(var opt of document.getElementById('selectedStudents').options){
+                if(opt.selected)
+                    studentsAssigned.push(opt.value);
+            } 
+            return studentsAssigned;
+        }
+
+        function getMentorOption(){
+            for(var opt of document.getElementById('selectedMentor').options){
+                if(opt.selected)
+                    return opt.value;
+            } 
+        }
+        function getMyMentorOption(){
+            for(var opt of document.getElementById('myMentor').options){
+                if(opt.selected)
+                    return opt.value;
+            } 
+        }
+        
+        function getChangableStudentOption(){
+            for(var opt of document.getElementById('selectStudent').options){
+                if(opt.selected)
+                    return opt.value;
+            } 
+        }
+        
+        function getChangedMentorOption(){
+            for(var opt of document.getElementById('selectMentor').options){
+                if(opt.selected)
+                    return opt.value;
+            } 
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+body{
+    background-image: url('https://www.incimages.com/uploaded_files/image/1920x1080/shutterstock_1059262403_364465.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.container{
+    background-image: url('https://www.the1thing.com/wp-content/uploads/2014/05/mentor2.jpg');
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-bottom: 10% !important;
+}
+
+#navtabs{
+    background-image: linear-gradient(black,purple);
+}
+
+#homeButtons{
+    margin-left: 30%;
+}
+h1{
+    font-size : x-large;
+    margin-left : 30%;
+    font-weight : bolder;
+}
+
+label{
+    color: #FF4136;
+    font-weight: bold;
+}
+
+.modal-title{
+    color: #001f3f;
+}
+td{
+    font-weight: bold;
+}
+
